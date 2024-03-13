@@ -1,0 +1,47 @@
+@import-normalize;
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 10px;
+  scroll-behavior: smooth;
+}
+
+.page {
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  width: 100%;
+
+  &_lock {
+    overflow: hidden;
+    padding-right: 17px;
+  }
+}
+
+#root {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+  margin: 0;
+  font-family: "Roboto", "Arial", sans-serif;
+  font-style: normal;
+  color: black;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+  -webkit-tap-highlight-color: transparent;
+  background-color: white;
+}
+
+body {
+  margin: 0;
+}
