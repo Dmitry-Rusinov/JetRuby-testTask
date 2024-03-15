@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-
 import styles from "./CharacterList.module.scss";
-
-import planet from "../../images/planet.png";
-import RickAndMorty from "../../images/RickAndMorty.png";
+import Card from "../Card/Card";
+import DataSelection from "../DataSelection/DataSelection";
+import Button from "../Button/Button";
 
 function CharacterList() {
   const [list, setList] = useState({ results: [] });
@@ -85,7 +84,7 @@ function CharacterList() {
   };
 
   useEffect(() => {
-    localStorage.setItem("radioId", JSON.stringify('characters'));
+    localStorage.setItem("radioId", JSON.stringify("characters"));
     fetchDataCharacter()
       .then((data) => data)
       .catch((error) => {
@@ -121,102 +120,35 @@ function CharacterList() {
             placeholder="Поиск"
           />
         </label>
-        <button type="submit">Поиск</button>
-
-        <div className={styles.checkbox_block}>
-          <span>
-            Персонажи &ensp;
-            <input
-              onChange={handleChangeValue}
-              onClick={(e) => handleClickRadio(e.target.id)}
-              type="radio"
-              name="check"
-              id="characters"
-            />
-          </span>
-          <span>
-            Локации &ensp;
-            <input
-              onChange={handleChangeValue}
-              onClick={(e) => handleClickRadio(e.target.id)}
-              type="radio"
-              name="check"
-              id="locations"
-            />
-          </span>
-          <span>
-            Эпизоды &ensp;
-            <input
-              onChange={handleChangeValue}
-              onClick={(e) => handleClickRadio(e.target.id)}
-              type="radio"
-              name="check"
-              id="episodes"
-            />
-          </span>
-        </div>
+        {/* <button type="submit"></button> */}
+        <Button type="submit" size="16px" text="Поиск" margin="0 30px 0 0"/>
+        <DataSelection
+          onChange={handleChangeValue}
+          onClick={(e) => handleClickRadio(e.target.id)}
+        />
       </form>
       <div className={styles.grid}>
-        {checkBoxValue === "characters" &&
+        {checkBoxValue &&
           list.results.map((item) => (
-            <div
-              key={item.id}
-              className={styles.card}
+            <Card
+              item={item}
               onClick={() => handleClickCard(item.id)}
-            >
-              <img src={item.image} alt={item.name} />
-              <div className={styles.description}>
-                <h3>{item.name}</h3>
-                <span>
-                  Статус: {item.status === "Alive" ? "Живой" : "Мертвый"}
-                </span>
-                <span>Раса: {item.species}</span>
-                <span>
-                  Пол: {item.gender === "Male" ? "Мужской" : "Женский"}
-                </span>
-              </div>
-            </div>
-          ))}
-
-        {checkBoxValue === "locations" &&
-          list.results.map((item) => (
-            <div
-              key={item.id}
-              className={styles.card}
-              onClick={() => handleClickCard(item.id)}
-            >
-              <img src={planet} alt={item.name} />
-              <div className={styles.description}>
-                <h3>{item.name}</h3>
-                <span>Тип: {item.type}</span>
-                <span>Измерение: {item.dimension}</span>
-              </div>
-            </div>
-          ))}
-
-        {checkBoxValue === "episodes" &&
-          list.results.map((item) => (
-            <div
-              key={item.id}
-              className={styles.card}
-              onClick={() => handleClickCard(item.id)}
-            >
-              <img src={RickAndMorty} alt={item.name} />
-              <div className={styles.description}>
-                <h3>{item.name}</h3>
-                <span>Дата выхода: {item.air_date}</span>
-                <span>Эпизод: {item.episode}</span>
-              </div>
-            </div>
+              checkBoxValue={checkBoxValue}
+            />
           ))}
       </div>
       <div>
-        <button type="button" onClick={handlePrevPage}>
-          Предыдущая страница
-        </button>
-        <button type="button" onClick={handleNextPage}>
-          Следующая страница
-        </button>
+        <Button
+          onClick={handlePrevPage}
+          text="Предыдущая страница"
+          prop="prev_next"
+          margin="0 100px 12px 0"
+        />
+        <Button
+          onClick={handleNextPage}
+          text="Следующая страница"
+          margin="0 0 12px 0"
+        />
       </div>
     </section>
   );

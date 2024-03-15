@@ -5,6 +5,7 @@ import axios from "axios";
 import styles from "./CharacterPage.module.scss";
 import planet from "../../images/planet.png";
 import RickAndMorty from "../../images/RickAndMorty.png";
+import Button from "../Button/Button";
 
 function CharacterPage() {
   const [cardData, setCardData] = useState({});
@@ -71,9 +72,7 @@ function CharacterPage() {
             </span>
           </div>
         </div>
-        <button onClick={() => navigate(-1)} type="button">
-          Назад
-        </button>
+        <Button onClick={() => navigate(-1)} text="Назад" size="20px" weight="600"/>
       </section>
     )) ||
     (cardType === "locations" && (
@@ -86,9 +85,7 @@ function CharacterPage() {
             <span>Измерение: {cardData.dimension}</span>
           </div>
         </div>
-        <button onClick={() => navigate(-1)} type="button">
-          Назад
-        </button>
+        <Button onClick={() => navigate(-1)} text="Назад" size="20px" weight="600"/>
       </section>
     )) ||
     (cardType === "episodes" && (
@@ -101,9 +98,7 @@ function CharacterPage() {
             <span>Эпизод: {cardData.episode}</span>
           </div>
         </div>
-        <button onClick={() => navigate(-1)} type="button">
-          Назад
-        </button>
+        <Button onClick={() => navigate(-1)} text="Назад" size="20px" weight="600"/>
       </section>
     ))
   );
