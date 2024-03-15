@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
-import styles from "./CharacterList.module.scss";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
+
+import styles from "./CharacterList.module.scss";
 
 import planet from "../../images/planet.png";
 import RickAndMorty from "../../images/RickAndMorty.png";
@@ -11,6 +13,8 @@ function CharacterList() {
   const [query, setQuery] = useState("");
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
+
+  const navigate = useNavigate();
 
   //Счетчик страниц вперед
   const handleNextPage = () => {
@@ -71,7 +75,17 @@ function CharacterList() {
     setSearch(query);
   };
 
+  const handleClickCard = (cardId) => {
+    localStorage.setItem("cardId", JSON.stringify(cardId));
+    navigate(`/character/${cardId}`);
+  };
+
+  const handleClickRadio = (radioId) => {
+    localStorage.setItem("radioId", JSON.stringify(radioId));
+  };
+
   useEffect(() => {
+    localStorage.setItem("radioId", JSON.stringify('characters'));
     fetchDataCharacter()
       .then((data) => data)
       .catch((error) => {
@@ -114,6 +128,7 @@ function CharacterList() {
             Персонажи &ensp;
             <input
               onChange={handleChangeValue}
+              onClick={(e) => handleClickRadio(e.target.id)}
               type="radio"
               name="check"
               id="characters"
@@ -123,6 +138,7 @@ function CharacterList() {
             Локации &ensp;
             <input
               onChange={handleChangeValue}
+              onClick={(e) => handleClickRadio(e.target.id)}
               type="radio"
               name="check"
               id="locations"
@@ -132,6 +148,7 @@ function CharacterList() {
             Эпизоды &ensp;
             <input
               onChange={handleChangeValue}
+              onClick={(e) => handleClickRadio(e.target.id)}
               type="radio"
               name="check"
               id="episodes"
@@ -142,7 +159,11 @@ function CharacterList() {
       <div className={styles.grid}>
         {checkBoxValue === "characters" &&
           list.results.map((item) => (
-            <div key={item.id} className={styles.card}>
+            <div
+              key={item.id}
+              className={styles.card}
+              onClick={() => handleClickCard(item.id)}
+            >
               <img src={item.image} alt={item.name} />
               <div className={styles.description}>
                 <h3>{item.name}</h3>
@@ -159,7 +180,11 @@ function CharacterList() {
 
         {checkBoxValue === "locations" &&
           list.results.map((item) => (
-            <div key={item.id} className={styles.card}>
+            <div
+              key={item.id}
+              className={styles.card}
+              onClick={() => handleClickCard(item.id)}
+            >
               <img src={planet} alt={item.name} />
               <div className={styles.description}>
                 <h3>{item.name}</h3>
@@ -171,7 +196,11 @@ function CharacterList() {
 
         {checkBoxValue === "episodes" &&
           list.results.map((item) => (
-            <div key={item.id} className={styles.card}>
+            <div
+              key={item.id}
+              className={styles.card}
+              onClick={() => handleClickCard(item.id)}
+            >
               <img src={RickAndMorty} alt={item.name} />
               <div className={styles.description}>
                 <h3>{item.name}</h3>
