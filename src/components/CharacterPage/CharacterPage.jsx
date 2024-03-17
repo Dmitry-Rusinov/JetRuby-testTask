@@ -72,7 +72,12 @@ function CharacterPage() {
             </span>
           </div>
         </div>
-        <Button onClick={() => navigate(-1)} text="Назад" size="20px" weight="600"/>
+        <Button
+          onClick={() => navigate(-1)}
+          text="Назад"
+          size="20px"
+          weight="600"
+        />
       </section>
     )) ||
     (cardType === "locations" && (
@@ -85,7 +90,12 @@ function CharacterPage() {
             <span>Измерение: {cardData.dimension}</span>
           </div>
         </div>
-        <Button onClick={() => navigate(-1)} text="Назад" size="20px" weight="600"/>
+        <Button
+          onClick={() => navigate(-1)}
+          text="Назад"
+          size="20px"
+          weight="600"
+        />
       </section>
     )) ||
     (cardType === "episodes" && (
@@ -98,7 +108,12 @@ function CharacterPage() {
             <span>Эпизод: {cardData.episode}</span>
           </div>
         </div>
-        <Button onClick={() => navigate(-1)} text="Назад" size="20px" weight="600"/>
+        <Button
+          onClick={() => navigate(-1)}
+          text="Назад"
+          size="20px"
+          weight="600"
+        />
       </section>
     ))
   );

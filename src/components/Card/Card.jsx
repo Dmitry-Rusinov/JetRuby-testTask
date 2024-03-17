@@ -6,7 +6,7 @@ import RickAndMorty from "../../images/RickAndMorty.png";
 
 function Card({ item, onClick, checkBoxValue }) {
   return (
-    <div key={item.id} className={styles.card} onClick={onClick}>
+    <div className={styles.card} onClick={onClick}>
       <img src={
         (checkBoxValue === 'characters' && item.image)
       || (checkBoxValue === 'locations' && planet)

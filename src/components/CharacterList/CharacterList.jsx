@@ -107,8 +107,8 @@ function CharacterList() {
   }, [checkBoxValue]);
 
   return (
-    <section className={styles.container}>
-      <form onSubmit={handleSubmit}>
+    <section data-testid="data-list" className={styles.container}>
+      <form data-testid="form" onSubmit={handleSubmit}>
         <label htmlFor="search">
           Поиск&nbsp;персонажа
           <input
@@ -118,22 +118,29 @@ function CharacterList() {
             id="search"
             name="search"
             placeholder="Поиск"
+            data-testid="search"
           />
         </label>
-        {/* <button type="submit"></button> */}
-        <Button type="submit" size="16px" text="Поиск" margin="0 30px 0 0"/>
+        <Button
+          onClick={handleSubmit}
+          type="submit"
+          size="16px"
+          text="Поиск"
+          margin="0 30px 0 0"
+        />
         <DataSelection
           onChange={handleChangeValue}
           onClick={(e) => handleClickRadio(e.target.id)}
         />
       </form>
-      <div className={styles.grid}>
+      <div data-testid="grid-container" className={styles.grid}>
         {checkBoxValue &&
           list.results.map((item) => (
             <Card
               item={item}
               onClick={() => handleClickCard(item.id)}
               checkBoxValue={checkBoxValue}
+              key={item.id}
             />
           ))}
       </div>
